@@ -1,6 +1,7 @@
 language: csharp
 solution: Roadway.sln
 mono: none
+dist: bionic
 dotnet: 2.2.300
 script:
  - dotnet restore
