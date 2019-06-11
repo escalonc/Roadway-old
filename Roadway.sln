@@ -13,7 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roadway.Infrastructure", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roadway.Data", "src\Roadway.Data\Roadway.Data.csproj", "{401B45B4-577C-4510-B8AA-CD6F841347E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roadway.Web", "src\Roadway.Web\Roadway.Web.csproj", "{EFAD28BF-1684-453C-A85C-C60BBF53D7A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roadway.Web", "src\Roadway.Web\Roadway.Web.csproj", "{EFAD28BF-1684-453C-A85C-C60BBF53D7A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0FD7A4D0-AB70-4F30-BBCA-8A66970FFAC9}"
+	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
