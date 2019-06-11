@@ -3,6 +3,9 @@ solution: Roadway.sln
 mono: none
 dist: bionic
 dotnet: 2.2.300
+node_js:
+  - "lts/*"
 script:
  - dotnet restore
+ - npm i --prefix ./src/Roadway.Web/ClientApp
  - dotnet build
