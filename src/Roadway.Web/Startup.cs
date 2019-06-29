@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Roadway.Core.Brands;
 using Roadway.Data.Contexts;
 using Roadway.Data.Entities;
 using Roadway.Data.Repositories;
@@ -42,6 +43,7 @@ namespace Roadway.Web
         {
             services.AddTransient<RoadwayContext>();
             services.AddTransient<BaseRepository<Brand>, BrandRepository>();
+            services.AddTransient<IBrandService, BrandService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

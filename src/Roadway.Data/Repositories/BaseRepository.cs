@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Roadway.Infrastructure.Pagination;
 
 namespace Roadway.Data.Repositories
 {
@@ -21,7 +22,7 @@ namespace Roadway.Data.Repositories
         protected BaseRepository(
             RoadwayContext context)
         {
-            this.Context = context;
+            Context = context;
         }
 
         /// <summary>
@@ -37,8 +38,14 @@ namespace Roadway.Data.Repositories
         /// </returns>
         public virtual IQueryable<TEntity> All() {
 
-            return this.Context.Set<TEntity>();
+            return Context.Set<TEntity>();
         }
+        
+        public virtual IQueryable<TEntity> All(int page, int size) {
+
+            return Context.Set<TEntity>().Page(page, size);
+        }
+
 
         /// <summary>
         /// Filters an entity set of values based on a predicate.
@@ -51,7 +58,7 @@ namespace Roadway.Data.Repositories
         /// </returns>
         public virtual IQueryable<TEntity> Filter(Expression<Func<TEntity, bool>> predicate)
         {
-            return this.All().Where(predicate);
+            return All().Where(predicate);
         }
 
         /// <summary>
@@ -68,7 +75,7 @@ namespace Roadway.Data.Repositories
         /// </returns>
         public virtual IQueryable<TResult> Project<TResult>(Expression<Func<TEntity, TResult>> predicate)
         {
-            return this.All().Select(predicate);
+            return All().Select(predicate);
         }
 
         /// <summary>
@@ -82,7 +89,7 @@ namespace Roadway.Data.Repositories
         /// </returns>
         public virtual async Task<TEntity> FirstAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await this.Filter(predicate).FirstAsync();
+            return await Filter(predicate).FirstAsync();
         }
 
         /// <summary>
@@ -92,7 +99,7 @@ namespace Roadway.Data.Repositories
         /// <returns>A task of the entity.</returns>
         public virtual async Task<TEntity> FindAsync(params object[] keys)
         {
-            return await this.FindAsync(CancellationToken.None, keys);
+            return await FindAsync(CancellationToken.None, keys);
         }
 
         /// <summary>
@@ -102,7 +109,7 @@ namespace Roadway.Data.Repositories
         /// <param name="keys">Entity identifier.</param>
         /// <returns>A task of the entity.</returns>
         public virtual async Task<TEntity> FindAsync(CancellationToken token, params object[] keys) =>
-            await ((DbSet<TEntity>)this.All()).FindAsync(token, keys);
+            await ((DbSet<TEntity>)All()).FindAsync(token, keys);
 
         /// <summary>
         /// Returns the first element of the entity set with the specified condition, or a default value if the entity set contains no elements.
@@ -115,7 +122,7 @@ namespace Roadway.Data.Repositories
         /// </returns>
         public virtual async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await this.All().FirstOrDefaultAsync(predicate);
+            return await All().FirstOrDefaultAsync(predicate);
         }
 
         /// <summary>
@@ -129,9 +136,9 @@ namespace Roadway.Data.Repositories
         /// </returns>
         public virtual async Task Create(TEntity entity)
         {
-            var entry = this.Context.Entry(entity);
+            var entry = Context.Entry(entity);
             entry.State = EntityState.Added;
-            await this.SaveChangesAsync();
+            await SaveChangesAsync();
         }
 
         /// <summary>
@@ -145,9 +152,9 @@ namespace Roadway.Data.Repositories
         /// </returns>
         public virtual async Task Update(TEntity entity)
         {
-            var entry = this.Context.Entry(entity);
+            var entry = Context.Entry(entity);
             entry.State = EntityState.Modified;
-            await this.SaveChangesAsync();
+            await SaveChangesAsync();
         }
 
         /// <summary>
@@ -161,9 +168,9 @@ namespace Roadway.Data.Repositories
         /// </returns>
         public virtual async Task Delete(TEntity entity)
         {
-            var entry = this.Context.Entry(entity);
+            var entry = Context.Entry(entity);
             entry.State = EntityState.Deleted;
-            await this.SaveChangesAsync();
+            await SaveChangesAsync();
         }
 
         /// <summary>
@@ -174,7 +181,7 @@ namespace Roadway.Data.Repositories
         /// </returns>
         public virtual Task<int> SaveChangesAsync()
         {
-            return this.Context.SaveChangesAsync();
+            return Context.SaveChangesAsync();
         }
     }
 }

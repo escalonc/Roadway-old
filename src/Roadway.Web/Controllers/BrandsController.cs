@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Roadway.Core.Brands;
+using Roadway.Core.Brands.Dto;
 
 namespace Roadway.Web.Controllers
 {
@@ -11,16 +10,18 @@ namespace Roadway.Web.Controllers
     [ApiController]
     public class BrandsController : ControllerBase
     {
-        public BrandsController()
-        {
+        private readonly IBrandService _brandService;
 
+        public BrandsController(IBrandService brandService)
+        {
+            _brandService = brandService;
         }
 
         // GET: api/Brands
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<GetBrand>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await _brandService.All(1, 10);
         }
 
         // GET: api/Brands/5

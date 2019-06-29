@@ -1,17 +1,17 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Roadway.Core.Common
 {
-    public interface IMaintainable<TEntity, TKey>
+    public interface IMaintainable<TGet, in TCreate, in TEdit, in TKey>
     {
-        Task Create(TEntity entity);
+        Task Create(TCreate entity);
 
-        Task<TEntity> FindById(TKey id);
+        Task<TGet> FindById(TKey id);
 
-        Task Update(TEntity entity);
+        Task<IEnumerable<TGet>> All(int page, int size);
+
+        Task Update(TEdit entity);
 
         Task Delete(TKey id);
 

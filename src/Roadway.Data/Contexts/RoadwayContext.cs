@@ -5,7 +5,7 @@ namespace Roadway.Data.Contexts
 {
     public class RoadwayContext : DbContext
     {
-        public RoadwayContext(DbContextOptions<RoadwayContext> options) : base(options)
+        public RoadwayContext(DbContextOptions options) : base(options)
         {
         }
 

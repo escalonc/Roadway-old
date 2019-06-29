@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Migrations\" />
+      <ProjectReference Include="..\Roadway.Infrastructure\Roadway.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

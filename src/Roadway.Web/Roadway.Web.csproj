@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.5.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -20,28 +21,74 @@
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
-    <None Remove="$(SpaRoot)**" />
-    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="ClientApp\src\components\Brands\AddBrand.tsx" />
-    <None Remove="ClientApp\src\components\Brands\BrandForm.tsx" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Remove="ClientApp\src\components\Brands\EditBrand.tsx" />
-    <TypeScriptCompile Remove="ClientApp\src\components\Cars\Register.tsx" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Content Remove="ClientApp\**" />
+    <Content Include="ClientApp\.env" />
+    <Content Include="ClientApp\.gitignore" />
+    <Content Include="ClientApp\package-lock.json" />
+    <Content Include="ClientApp\package.json" />
+    <Content Include="ClientApp\public\favicon.ico" />
+    <Content Include="ClientApp\public\index.html" />
+    <Content Include="ClientApp\public\manifest.json" />
+    <Content Include="ClientApp\README.md" />
+    <Content Include="ClientApp\src\containers\App\index.css" />
+    <Content Include="ClientApp\src\containers\Dashboard\index.css" />
+    <Content Include="ClientApp\src\index.css" />
     <Content Include="ClientApp\tsconfig.json" />
+    <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+    <None Include="ClientApp\src\containers\Brands\components\AddBrand.tsx" />
+    <None Include="ClientApp\src\containers\Brands\components\BrandForm.tsx" />
+    <None Include="ClientApp\src\containers\Brands\components\BrandList.tsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ClientApp\**" />
+    <EmbeddedResource Remove="ClientApp\**" />
+    <TypeScriptCompile Remove="ClientApp\**" />
+    <TypeScriptCompile Include="ClientApp\src\containers\App\index.test.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\containers\App\index.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\containers\Brands\components\EditBrand.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\containers\Brands\hooks\BrandResource.ts" />
+    <TypeScriptCompile Include="ClientApp\src\containers\Brands\index.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\containers\Cars\components\Register.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\containers\Cars\index.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\containers\Dashboard\index.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\index.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\react-app-env.d.ts" />
+    <TypeScriptCompile Include="ClientApp\src\serviceWorker.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\.gitignore" />
+    <None Remove="ClientApp\package-lock.json" />
+    <None Remove="ClientApp\package.json" />
+    <None Remove="ClientApp\public\favicon.ico" />
+    <None Remove="ClientApp\public\index.html" />
+    <None Remove="ClientApp\public\manifest.json" />
+    <None Remove="ClientApp\README.md" />
+    <None Remove="ClientApp\src\components\Brands\EditBrand.tsx" />
+    <None Remove="ClientApp\src\components\Cars\Register.tsx" />
+    <None Remove="ClientApp\src\containers\App\index.css" />
+    <None Remove="ClientApp\src\containers\App\index.test.tsx" />
+    <None Remove="ClientApp\src\containers\App\index.tsx" />
+    <None Remove="ClientApp\src\containers\Dashboard\index.css" />
+    <None Remove="ClientApp\src\containers\Dashboard\index.tsx" />
+    <None Remove="ClientApp\src\index.css" />
+    <None Remove="ClientApp\src\index.tsx" />
+    <None Remove="ClientApp\src\react-app-env.d.ts" />
+    <None Remove="ClientApp\src\serviceWorker.ts" />
+    <None Remove="ClientApp\tsconfig.json" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Roadway.Core\Roadway.Core.csproj" />
     <ProjectReference Include="..\Roadway.Data\Roadway.Data.csproj" />
     <ProjectReference Include="..\Roadway.Infrastructure\Roadway.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\components" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
