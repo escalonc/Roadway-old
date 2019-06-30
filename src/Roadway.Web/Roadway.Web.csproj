@@ -46,8 +46,14 @@
     <Compile Remove="ClientApp\**" />
     <EmbeddedResource Remove="ClientApp\**" />
     <TypeScriptCompile Remove="ClientApp\**" />
+    <TypeScriptCompile Include="ClientApp\src\components\DataTable\index.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\DataTable\SearchDialogColumn.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\Modal.tsx" />
     <TypeScriptCompile Include="ClientApp\src\containers\App\index.test.tsx" />
     <TypeScriptCompile Include="ClientApp\src\containers\App\index.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\containers\Brands\components\AddBrand.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\containers\Brands\components\BrandForm.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\containers\Brands\components\BrandList.tsx" />
     <TypeScriptCompile Include="ClientApp\src\containers\Brands\components\EditBrand.tsx" />
     <TypeScriptCompile Include="ClientApp\src\containers\Brands\hooks\BrandResource.ts" />
     <TypeScriptCompile Include="ClientApp\src\containers\Brands\index.tsx" />
@@ -85,10 +91,6 @@
     <ProjectReference Include="..\Roadway.Core\Roadway.Core.csproj" />
     <ProjectReference Include="..\Roadway.Data\Roadway.Data.csproj" />
     <ProjectReference Include="..\Roadway.Infrastructure\Roadway.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\src\components" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
