@@ -9,3 +9,4 @@ script:
  - dotnet restore
  - npm i --prefix ./src/Roadway.Web/ClientApp
  - dotnet build
+ - dotnet test
