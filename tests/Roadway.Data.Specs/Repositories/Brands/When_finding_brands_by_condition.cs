@@ -37,7 +37,7 @@ namespace Roadway.Data.Specs.Repositories.Brands
             await _repository.Create(_selectedBrands.ElementAt(1));
         };
 
-        private Because of = async () =>
+        private Because of = () =>
         {
             _brands = _repository.Filter(brand => brand.Name == "Fiat" || brand.Name == "Kia");
         };
