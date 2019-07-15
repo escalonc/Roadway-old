@@ -1,19 +1,17 @@
-using System;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Roadway.Core.Brands;
-using Roadway.Data.Contexts;
-using Roadway.Data.Entities;
-using Roadway.Data.Repositories;
-
 namespace Roadway.Web
 {
+    using Core.Brands;
+    using Data.Contexts;
+    using Data.Entities;
+    using Data.Repositories;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -36,7 +34,7 @@ namespace Roadway.Web
 
             services.AddDbContext<RoadwayContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
-            ConfigureDependencies(services);
+            this.ConfigureDependencies(services);
         }
 
         private void ConfigureDependencies(IServiceCollection services)

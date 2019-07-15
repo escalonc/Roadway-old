@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Roadway.Core.Brands;
-using Roadway.Core.Brands.Dto;
-
-namespace Roadway.Web.Controllers
+﻿namespace Roadway.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Core.Brands;
+    using Core.Brands.Dto;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/[controller]")]
     [ApiController]
     public class BrandsController : ControllerBase
@@ -21,7 +21,7 @@ namespace Roadway.Web.Controllers
         [HttpGet]
         public async Task<IEnumerable<GetBrand>> Get()
         {
-            return await _brandService.All(1, 10);
+            return await _brandService.FindAll(1, 10);
         }
 
         // GET: api/Brands/5

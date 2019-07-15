@@ -9,11 +9,11 @@ namespace Roadway.Core.Common
 
         Task<TGet> FindById(TKey id);
 
-        Task<IEnumerable<TGet>> All(int page, int size);
+        Task<IEnumerable<TGet>> FindAll(int page, int size);
 
         Task Update(TEdit entity);
 
-        Task Delete(TKey id);
+        Task Remove(TKey id);
 
     }
 }

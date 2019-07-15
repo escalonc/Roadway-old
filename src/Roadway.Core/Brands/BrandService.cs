@@ -27,13 +27,13 @@ namespace Roadway.Core.Brands
             await _brandRepository.Create(brand);
         }
 
-        public async Task Delete(int id)
+        public async Task Remove(int id)
         {
             var entity = await _brandRepository.FindAsync(id);
             await _brandRepository.Delete(entity);
         }
 
-        public async Task<IEnumerable<GetBrand>> All(int page, int size)
+        public async Task<IEnumerable<GetBrand>> FindAll(int page, int size)
         {
             return await _brandRepository.All(page, size).Select(brand => new GetBrand
             {
