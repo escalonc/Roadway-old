@@ -4,11 +4,12 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Roadway.Data.Entities;
 using Roadway.Infrastructure.Pagination;
 
 namespace Roadway.Data.Repositories
 {
-    public abstract class BaseRepository<TEntity> where TEntity : class
+    public abstract class BaseRepository<TEntity> where TEntity : class, IAggregateRoot
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseRepository{TEntity}"/> class.
@@ -144,6 +145,15 @@ namespace Roadway.Data.Repositories
             var entry = Context.Entry(entity);
             entry.State = EntityState.Deleted;
             await SaveChangesAsync();
+        }
+        
+        public async Task<TEntity> Disable(TEntity entity)
+        {
+            var entry = Context.Entry(entity);
+            entity.Disabled = true;
+            entry.State = EntityState.Modified;
+            await SaveChangesAsync();
+            return entity;
         }
 
         /// <summary>

@@ -1,8 +1,8 @@
 namespace Roadway.Data.Entities
 {
-    public interface IAgregateRoot
+    public interface IAggregateRoot
     {
         int Id { get; set; }
-        bool Removed { get; set; }
+        bool Disabled { get; set; }
     }
 }
