@@ -19,9 +19,15 @@
 
         // GET: api/Brands
         [HttpGet]
-        public async Task<IEnumerable<GetBrand>> Get()
+        public async Task<IEnumerable<GetBrand>> Get(int page = 1, int size = 10)
         {
-            return await _brandService.FindAll(1, 10);
+            return await _brandService.FindAll(page, size);
+        }
+
+        [HttpGet("search")]
+        public async Task<IEnumerable<GetBrand>> Search(string searchTerm, int page = 1, int size = 10)
+        {
+            return await _brandService.Search(searchTerm, page, size);
         }
 
         // GET: api/Brands/5

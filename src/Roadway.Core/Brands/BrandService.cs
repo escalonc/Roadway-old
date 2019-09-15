@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Roadway.Core.Brands.Dto;
 using Roadway.Data.Entities;
 using Roadway.Data.Repositories;
+using Roadway.Infrastructure.Pagination;
 
 namespace Roadway.Core.Brands
 {
@@ -59,8 +60,21 @@ namespace Roadway.Core.Brands
                 Id = entity.Id,
                 Name = entity.Name
             };
-            
+
             await _brandRepository.Update(brand);
+        }
+
+        public async Task<IEnumerable<GetBrand>> Search(string searchTerm, int page, int size)
+        {
+            return await _brandRepository
+                .Filter(brand => brand.Name.Contains(searchTerm))
+                .Page(page, size)
+                .Select(brand => new GetBrand
+                {
+                    Id = brand.Id,
+                    Name = brand.Name
+                })
+                .ToListAsync();
         }
     }
 }

@@ -7,9 +7,12 @@ namespace Roadway.Core.Common
     {
         Task Create(TCreate entity);
 
+
         Task<TGet> FindById(TKey id);
 
         Task<IEnumerable<TGet>> FindAll(int page, int size);
+
+        Task<IEnumerable<TGet>> Search(string searchTerm, int page, int size);
 
         Task Update(TEdit entity);
 
