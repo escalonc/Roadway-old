@@ -1,3 +1,5 @@
+using Swashbuckle.AspNetCore.Swagger;
+
 namespace Roadway.Web
 {
     using Core.Brands;
@@ -32,7 +34,12 @@ namespace Roadway.Web
                 configuration.RootPath = "ClientApp/build";
             });
 
-            services.AddDbContext<RoadwayContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<RoadwayContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Roadway API", Version = "v1" });
+            });
 
             this.ConfigureDependencies(services);
         }
@@ -61,6 +68,8 @@ namespace Roadway.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+            app.UseSwagger();
 
             app.UseMvc(routes =>
             {

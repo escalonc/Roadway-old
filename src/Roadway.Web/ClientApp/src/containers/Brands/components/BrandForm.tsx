@@ -51,7 +51,7 @@ function BrandForm(props: Props) {
   };
 
   return (
-    <Form {...formItemLayout} onSubmit={handleSubmit}>
+    <Form {...formItemLayout}>
       <Form.Item label="Nombre">
         {getFieldDecorator("name", {
           initialValue: name,

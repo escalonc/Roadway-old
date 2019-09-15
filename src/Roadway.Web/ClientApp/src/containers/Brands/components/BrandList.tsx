@@ -1,24 +1,25 @@
-import React from "react";
-import { Table } from "antd";
-import { useResource } from "rest-hooks";
-import BrandResource from "../hooks/BrandResource";
+import React, { useState, ChangeEvent } from "react";
+import { Table, Input } from "antd";
+
 import Column from "antd/lib/table/Column";
-import DataTable from "../../../components/DataTable";
-import SearchDialogColumn from "../../../components/DataTable/SearchDialogColumn";
+import {FetchBrands} from "../brandHooks";
 
 function BrandList() {
-  const brands = useResource(BrandResource.listRequest(), {});
-
+    const brands = FetchBrands();
+    const [searchTerm, setSearchTerm] = useState("");
   return (
-    <DataTable<BrandResource> dataSource={brands} rowKey="id">
-      <SearchDialogColumn<number>
-        title="Código"
-        dataIndex="id"
-        key="id"
-        width="30%"
-      />
-      <SearchDialogColumn title="Nombre" dataIndex="name" key="name" />
-    </DataTable>
+      <>
+          <Input placeholder="Buscar..." style={{ marginBottom: 20 }} onChange={(event: ChangeEvent<HTMLInputElement>) => setSearchTerm(event.target.value)}></Input>
+          <Table dataSource={brands} rowKey="id">
+              <Column
+                  title="Código"
+                  dataIndex="id"
+                  key="id"
+                  width="30%"
+              />
+              <Column title="Nombre" dataIndex="name" key="name" />
+          </Table>
+      </>
   );
 }
 

@@ -9,7 +9,7 @@ using Roadway.Infrastructure.Pagination;
 
 namespace Roadway.Data.Repositories
 {
-    public abstract class BaseRepository<TEntity> where TEntity : class, IAggregateRoot
+    public abstract class BaseRepository<TEntity> where TEntity : BaseEntity
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseRepository{TEntity}"/> class.
