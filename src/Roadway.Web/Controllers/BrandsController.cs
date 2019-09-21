@@ -25,9 +25,11 @@
         }
 
         [HttpGet("search")]
-        public async Task<IEnumerable<GetBrand>> Search(string searchTerm, int page = 1, int size = 10)
+        public async Task<JsonResult> Search(string searchTerm, int page = 1, int size = 10)
         {
-            return await _brandService.Search(searchTerm, page, size);
+            var data = await _brandService.Search(searchTerm, page, size);
+            return new JsonResult(data);
+
         }
 
         // GET: api/Brands/5

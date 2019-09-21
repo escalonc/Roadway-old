@@ -34,7 +34,7 @@
     <None Remove="$(SpaRoot)**" />
     <None Remove="ClientApp\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
-    <None Include="ClientApp\src\containers\Brands\brandHooks.ts" />
+    <None Remove="ClientApp\src\models.ts" />
     <None Include="ClientApp\src\containers\Brands\brandModel.ts" />
     <None Include="ClientApp\src\containers\Brands\components\AddBrand.tsx" />
     <None Include="ClientApp\src\containers\Brands\components\BrandForm.tsx" />
@@ -45,7 +45,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Roadway.Core\Roadway.Core.csproj" />
     <ProjectReference Include="..\Roadway.Data\Roadway.Data.csproj" />
-    <ProjectReference Include="..\Roadway.Infrastructure\Roadway.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\models.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -36,7 +36,7 @@ namespace Roadway.Core.Brands
 
         public async Task<IEnumerable<GetBrand>> FindAll(int page, int size)
         {
-            return await _brandRepository.All(page, size).Select(brand => new GetBrand
+            return await _brandRepository.All().Page(page, size).Select(brand => new GetBrand
             {
                 Id = brand.Id,
                 Name = brand.Name
@@ -64,9 +64,9 @@ namespace Roadway.Core.Brands
             await _brandRepository.Update(brand);
         }
 
-        public async Task<IEnumerable<GetBrand>> Search(string searchTerm, int page, int size)
+        public async Task<PaginationResponseModel<GetBrand>> Search(string searchTerm, int page, int size)
         {
-            return await _brandRepository
+            var data = await _brandRepository
                 .Filter(brand => brand.Name.Contains(searchTerm))
                 .Page(page, size)
                 .Select(brand => new GetBrand
@@ -75,6 +75,8 @@ namespace Roadway.Core.Brands
                     Name = brand.Name
                 })
                 .ToListAsync();
+
+            return new PaginationResponseModel<GetBrand> { Data= data, TotalCount= _brandRepository.All().Count()};
         }
     }
 }

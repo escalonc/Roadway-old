@@ -1,3 +1,4 @@
+using Roadway.Infrastructure.Pagination;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace Roadway.Core.Common
 
         Task<IEnumerable<TGet>> FindAll(int page, int size);
 
-        Task<IEnumerable<TGet>> Search(string searchTerm, int page, int size);
+        Task<PaginationResponseModel<TGet>> Search(string searchTerm, int page, int size);
 
         Task Update(TEdit entity);
 

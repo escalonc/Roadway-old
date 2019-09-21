@@ -5,7 +5,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Roadway.Data.Entities;
-using Roadway.Infrastructure.Pagination;
 
 namespace Roadway.Data.Repositories
 {
@@ -38,12 +37,6 @@ namespace Roadway.Data.Repositories
 
             return Context.Set<TEntity>();
         }
-        
-        public IQueryable<TEntity> All(int? page, int? size) {
-
-            return Context.Set<TEntity>().Page(page ?? 0, size ?? 10);
-        }
-
 
         /// <summary>
         /// Filters an entity set of values based on a predicate.

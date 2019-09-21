@@ -21,7 +21,7 @@ namespace Roadway.Web
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -36,11 +36,6 @@ namespace Roadway.Web
 
             services.AddDbContext<RoadwayContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "Roadway API", Version = "v1" });
-            });
-
             this.ConfigureDependencies(services);
         }
 
@@ -54,6 +49,11 @@ namespace Roadway.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
+            var builder = new ConfigurationBuilder()
+                        .AddJsonFile("appsettings.json")
+                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -64,6 +64,9 @@ namespace Roadway.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            builder.AddEnvironmentVariables();
+            Configuration = builder.Build();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
